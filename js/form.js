@@ -27,28 +27,30 @@ botaoAdicionar.addEventListener("click",function(event){
 
 //aplicando o CSS do formulario para input invalido e nao montando o
 //isNaN é uma funçao para verificar se o conteudo é numerico
-if (isNaN(paciente.imc)){
+   if (isNaN(paciente.imc)){
 //    pacienteTr.classList.add("paciente-invalido");
-    console.log("Paciente inválido, náo sera incluido uma nova linha na lista: ", paciente.imc);
-    var mensagemErro = document.querySelector("#mensagem-erro");
-    mensagemErro.textContent = "Paciente inválido, náo sera incluido uma nova linha na tabela: " + paciente.imc;
-    return;
-}
+       console.log("Paciente inválido, náo sera incluido uma nova linha na lista: ", paciente.imc);
+       var mensagemErro = document.querySelector("#mensagem-erro");
+       mensagemErro.textContent = "Paciente inválido, náo sera incluido uma nova linha na tabela: " + paciente.imc;
+       return;
+   }
 
-//*** CRIA A TR E A TD
-  var pacienteTr = montaTr(paciente);
+   adicionaPacienteNaTabela(paciente);
 
-//*** ADICIONANDO O PACIENTE NA TABELA
-// pegar a tabela de pacientes do HTML e trazer para o JS
-  var tabela = document.querySelector("#tabela-pacientes");
-
-//usar o appendChild para colocar o TR dentro do tbody(tabela)
-  tabela.appendChild(pacienteTr);
-
-// limpar os campos digitados do formulario
-  form.reset();
+   // limpar os campos digitados do formulario
+   form.reset();
 
 }); // fim do botaoAdicionar
+
+function adicionaPacienteNaTabela(paciente){
+  //*** CRIA A TR E A TD
+  var pacienteTr = montaTr(paciente);
+  // pegar a tabela de pacientes do HTML e trazer para o JS
+  var tabela = document.querySelector("#tabela-pacientes");
+  //usar o appendChild para colocar o TR dentro do tbody(tabela)
+    tabela.appendChild(pacienteTr);
+
+}
 
 // pela value, voce traz o valor dos dados digitados no form para var do js
 // tudo isso abaixo sao dados do paciente, o que representa algo no mundo real,
