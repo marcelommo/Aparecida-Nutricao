@@ -9,16 +9,25 @@ botaoAdicionar.addEventListener("click", function(){
 
 //carrega os dados de outro site para o mundo do JS
   xhr.addEventListener("load", function(){
-    var resposta = xhr.responseText;
-    console.log(resposta);
-    console.log(typeof resposta);
+  var erroAjax = document.querySelector("#erro-ajax");
+    if( xhr.status == 200){
+      //se foi ok, ele adiciona a classe invisivel
+      erroAjax.classList.add("invisivel");
+      var resposta = xhr.responseText;
 
-//traduz a resposta para o JavaScript - tecnica chamada AJAX (requisicao no javascript de modo assincrono(sem travar o JS))
-    var pacientes = JSON.parse(resposta);
+      //traduz a resposta para o JavaScript - tecnica chamada AJAX (requisicao no javascript de modo assincrono(sem travar o JS))
+      var pacientes = JSON.parse(resposta);
 
-    pacientes.forEach( function(paciente){
-        adicionaPacienteNaTabela(paciente);
-    });
+      pacientes.forEach( function(paciente){
+          adicionaPacienteNaTabela(paciente);
+      });
+
+    }else{
+      console.log( xhr.status);
+      console.log( xhr.responseText);
+      //se deu erro ele remove a classe invisivel
+      erroAjax.classList.remove("invisivel");
+    }
 
   });
   xhr.send()
